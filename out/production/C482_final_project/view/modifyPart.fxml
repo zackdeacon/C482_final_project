@@ -22,7 +22,7 @@
         <TextField fx:id="modifyPartMachineID" layoutX="134.0" layoutY="289.0" />
         <Label layoutX="330.0" layoutY="257.0" text="Min" />
         <TextField fx:id="modifyPartMin" layoutX="376.0" layoutY="252.0" />
-        <Button fx:id="savePart" layoutX="295.0" layoutY="332.0" mnemonicParsing="false" text="Save" />
+        <Button fx:id="savePart" layoutX="295.0" layoutY="332.0" mnemonicParsing="false" text="Save" onAction="#saveModifications"/>
         <Button layoutX="376.0" layoutY="332.0" mnemonicParsing="false" onAction="#backToMain" text="Cancel" />
       <Label layoutX="27.0" layoutY="35.0" text="Modify Part">
          <font>
