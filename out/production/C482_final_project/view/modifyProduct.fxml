@@ -25,20 +25,20 @@
                 <Label layoutX="49.0" layoutY="269.0" text="Price" />
                 <Label layoutX="49.0" layoutY="317.0" text="Max" />
                 <Label layoutX="213.0" layoutY="317.0" text="Min" />
-                <TableView layoutX="440.0" layoutY="63.0" prefHeight="200.0" prefWidth="424.0">
+                <TableView fx:id="ModifyProductPartTable" layoutX="440.0" layoutY="63.0" prefHeight="200.0" prefWidth="424.0">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="Part ID" />
-                        <TableColumn prefWidth="90.0" text="Part Name" />
-                        <TableColumn prefWidth="130.0" text="Inventory Level" />
-                        <TableColumn prefWidth="130.0" text="Price/Cost per Unit" />
+                        <TableColumn fx:id="ModifyProductPartID" prefWidth="75.0" text="Part ID" />
+                        <TableColumn fx:id="ModifyProductPartName" prefWidth="90.0" text="Part Name" />
+                        <TableColumn fx:id="ModifyProductPartInv" prefWidth="130.0" text="Inventory Level" />
+                        <TableColumn fx:id="ModifyProductPartPrice" prefWidth="130.0" text="Price/Cost per Unit" />
                     </columns>
                 </TableView>
-                <TableView layoutX="440.0" layoutY="312.0" prefHeight="200.0" prefWidth="424.0">
+                <TableView fx:id="ModifyProductAssociatedPartTable" layoutX="440.0" layoutY="312.0" prefHeight="200.0" prefWidth="424.0">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="Product ID" />
-                        <TableColumn prefWidth="90.0" text="Product Name" />
-                        <TableColumn prefWidth="130.0" text="Inventory Level" />
-                        <TableColumn prefWidth="130.0" text="Price/Cost per Unit" />
+                        <TableColumn fx:id="ModifyProductAssociatedPartID" prefWidth="75.0" text="Product ID" />
+                        <TableColumn fx:id="ModifyProductAssociatedPartName" prefWidth="90.0" text="Product Name" />
+                        <TableColumn fx:id="ModifyProductAssociatedPartInv" prefWidth="130.0" text="Inventory Level" />
+                        <TableColumn fx:id="ModifyProductAssociatedPartPrice" prefWidth="130.0" text="Price/Cost per Unit" />
                     </columns>
                 </TableView>
                 <Button layoutX="763.0" layoutY="273.0" mnemonicParsing="false" text="Add" />
