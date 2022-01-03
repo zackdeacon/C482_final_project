@@ -20,6 +20,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class mainController implements Initializable {
@@ -35,6 +36,7 @@ public class mainController implements Initializable {
     public TableColumn productInvCol;
     public TableColumn productPriceCol;
     public TextField partSearch;
+    public TextField productSearch;
 
     public static Part selectedPart;
     public static int selectedID;
@@ -112,6 +114,10 @@ public class mainController implements Initializable {
      //FIXME
     }
 
+    public void toExit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
     public void getSearchResults(ActionEvent actionEvent) {
         String queue = partSearch.getText();
         ObservableList<Part> theParts = searchPartName(queue);
@@ -120,14 +126,40 @@ public class mainController implements Initializable {
         partSearch.setText("");
     }
 
+    public void getProductSearchResults(ActionEvent actionEvent) {
+        String queue = productSearch.getText();
+        ObservableList<Product> theProducts = searchProductName(queue);
+
+        mainProductTable.setItems(theProducts);
+        productSearch.setText("");
+    }
+
+    private ObservableList<Product> searchProductName(String partialName) {
+        ObservableList<Product> selectedProducts = FXCollections.observableArrayList();
+        ObservableList<Product> allProducts = Inventory.getAllProducts();
+
+        for( Product selectedProduct: allProducts){
+            if(selectedProduct.getName().contains(partialName)){
+                selectedProducts.add(selectedProduct);
+            } else if(String.valueOf(selectedProduct.getId()).contains(partialName)){
+                selectedProducts.add(selectedProduct);
+            }
+        }
+        return selectedProducts;
+    }
+
     private ObservableList<Part> searchPartName(String partialName) {
         ObservableList<Part> selectedParts = FXCollections.observableArrayList();
 
         ObservableList<Part> allParts = Inventory.getAllParts();
 
+
+
         for( Part selectedPart: allParts){
 
             if(selectedPart.getName().contains(partialName)){
+                selectedParts.add(selectedPart);
+            } else if(String.valueOf(selectedPart.getId()).contains(partialName)){
                 selectedParts.add(selectedPart);
             }
         }
@@ -136,3 +168,5 @@ public class mainController implements Initializable {
     }
 
 }
+
+
