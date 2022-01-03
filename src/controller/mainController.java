@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
+import model.Product;
 
 
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class mainController implements Initializable {
 
     public static Part selectedPart;
     public static int selectedID;
+    public static Product selectedProduct;
+    public static int selectedProductID;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,6 +60,8 @@ public class mainController implements Initializable {
 
 
     public void toModifyProduct(ActionEvent actionEvent) throws IOException {
+        selectedProduct = (Product) mainProductTable.getSelectionModel().getSelectedItem();
+        selectedProductID = selectedProduct.getId();
         Parent root = FXMLLoader.load(getClass().getResource("/view/modifyProduct.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 650);
@@ -86,7 +91,6 @@ public class mainController implements Initializable {
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
         selectedPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
         selectedID = selectedPart.getId();
-        System.out.println(selectedPart);
         Parent root = FXMLLoader.load(getClass().getResource("/view/modifyPart.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 650);
