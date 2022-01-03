@@ -70,16 +70,19 @@ public class Product {
     }
 
     public void addAssociatedPart(Part part) {
-        //FIXME
+        associatedParts.add(part);
     }
 
     public boolean deleteAssociatedPart(Part selectedAssociatedPart) {
-        //FIXME
+        if(associatedParts.contains(selectedAssociatedPart)){
+            associatedParts.remove(selectedAssociatedPart);
+            return true;
+        }
         return false;
     }
-    /*
+
     public ObservableList<Part> getAllAssociatedParts() {
-        FIXME
+        return associatedParts;
     }
-     */
+
 }
