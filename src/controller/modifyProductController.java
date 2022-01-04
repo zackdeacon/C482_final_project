@@ -12,8 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
-import model.inHouse;
-import model.outSourced;
+
 
 import java.io.IOException;
 import java.net.URL;

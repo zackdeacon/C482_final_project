@@ -42,7 +42,7 @@ public class addProductController implements Initializable {
     public TextField addProductMin;
     public TextField addProductMax;
 
-
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,6 +52,11 @@ public class addProductController implements Initializable {
         addProductNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         addProductInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         addProductPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        addProductAssociatedPartsProductID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        addProductAssociatedPartsProductName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        addProductAssociatedPartsProductInv.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        addProductAssociatedPartsProductPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
     public void getSearchResults(ActionEvent actionEvent) {
@@ -67,8 +72,6 @@ public class addProductController implements Initializable {
 
         ObservableList<Part> allParts = Inventory.getAllParts();
 
-
-
         for(Part selectedPart: allParts){
 
             if(selectedPart.getName().contains(partialName)){
@@ -79,6 +82,18 @@ public class addProductController implements Initializable {
         }
 
         return selectedParts;
+    }
+
+    public void toAddAssociation() {
+        Part selectedPart = (Part) addProductTable.getSelectionModel().getSelectedItem();
+        associatedParts.add(selectedPart);
+        addProductAssociatedPartsTable.setItems(associatedParts);
+    }
+
+    public void toRemoveAssociation() {
+        Part selectedPart = (Part) addProductAssociatedPartsTable.getSelectionModel().getSelectedItem();
+        associatedParts.remove(selectedPart);
+        addProductAssociatedPartsTable.setItems(associatedParts);
     }
 
     public void toSaveProduct(ActionEvent actionEvent) throws IOException {
