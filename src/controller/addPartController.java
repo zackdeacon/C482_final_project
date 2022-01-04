@@ -49,7 +49,7 @@ public class addPartController implements Initializable {
         stage.show();
     }
 
-    public void saveAddPart(ActionEvent actionEvent) {
+    public void saveAddPart(ActionEvent actionEvent) throws IOException{
         String newName = addPartName.getText();
         double newPrice = Double.parseDouble(addPartPriceCost.getText());
         int newInv = Integer.parseInt(addPartInv.getText());
@@ -65,7 +65,7 @@ public class addPartController implements Initializable {
             inHouse part = new inHouse(getNewPartID(), newName, newPrice, newInv, newMin, newMax, newMachineID);
             Inventory.addPart(part);
         }
-        //navigate back to main page
+        backToMain(actionEvent);
     }
 
     public void outSourcedSet(ActionEvent actionEvent) {
