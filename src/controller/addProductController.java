@@ -104,6 +104,9 @@ public class addProductController implements Initializable {
         int newMax = Integer.parseInt(addProductMax.getText());
 
         Product product = new Product(getNewProductID(), newName, newPrice, newStock, newMin, newMax);
+        for(Part part : associatedParts) {
+            product.addAssociatedPart(part);
+        }
         Inventory.addProduct(product);
 
         backToMain(actionEvent);

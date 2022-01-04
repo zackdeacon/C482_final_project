@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
+import model.Part;
 
 
 import java.io.IOException;
@@ -40,24 +43,37 @@ public class modifyProductController implements Initializable{
     public TextField modifyProductMin;
     public TextField modifyProductPrice;
 
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Initialized");
-        ModifyProductPartTable.setItems(Inventory.getAllParts());
-        ModifyProductPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        ModifyProductPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        ModifyProductPartInv.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        ModifyProductPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+
         setPage();
     }
 
     public void setPage() {
+
+        associatedParts = selectedProduct.getAllAssociatedParts();
+
         modifyProductID.setText(String.valueOf(selectedProductID));
         modifyProductName.setText(selectedProduct.getName());
         modifyProductInv.setText(String.valueOf(selectedProduct.getStock()));
         modifyProductMax.setText(String.valueOf(selectedProduct.getMax()));
         modifyProductMin.setText(String.valueOf(selectedProduct.getMin()));
         modifyProductPrice.setText(String.valueOf(selectedProduct.getPrice()));
+
+        ModifyProductPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ModifyProductPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ModifyProductPartInv.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        ModifyProductPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ModifyProductPartTable.setItems(Inventory.getAllParts());
+
+        ModifyProductAssociatedPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ModifyProductAssociatedPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ModifyProductAssociatedPartInv.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        ModifyProductAssociatedPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ModifyProductAssociatedPartTable.setItems(associatedParts);
 
     }
 
