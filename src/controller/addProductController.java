@@ -15,10 +15,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
+import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import static model.Inventory.getNewProductID;
 
 public class addProductController implements Initializable {
 
@@ -33,6 +35,13 @@ public class addProductController implements Initializable {
     public TableColumn addProductAssociatedPartsProductInv;
     public TableColumn addProductAssociatedPartsProductPrice;
     public TextField searchParts;
+    public TextField addProductID;
+    public TextField addProductName;
+    public TextField addProductPrice;
+    public TextField addProductInv;
+    public TextField addProductMin;
+    public TextField addProductMax;
+
 
 
     @Override
@@ -60,7 +69,7 @@ public class addProductController implements Initializable {
 
 
 
-        for( Part selectedPart: allParts){
+        for(Part selectedPart: allParts){
 
             if(selectedPart.getName().contains(partialName)){
                 selectedParts.add(selectedPart);
@@ -70,6 +79,19 @@ public class addProductController implements Initializable {
         }
 
         return selectedParts;
+    }
+
+    public void toSaveProduct(ActionEvent actionEvent) throws IOException {
+        String newName = addProductName.getText();
+        double newPrice = Double.parseDouble(addProductPrice.getText());
+        int newStock = Integer.parseInt(addProductInv.getText());
+        int newMin = Integer.parseInt(addProductMin.getText());
+        int newMax = Integer.parseInt(addProductMax.getText());
+
+        Product product = new Product(getNewProductID(), newName, newPrice, newStock, newMin, newMax);
+        Inventory.addProduct(product);
+
+        backToMain(actionEvent);
     }
 
     public void backToMain(ActionEvent actionEvent) throws IOException {
