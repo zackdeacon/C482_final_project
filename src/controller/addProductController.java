@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,9 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
+import model.Part;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,6 +32,7 @@ public class addProductController implements Initializable {
     public TableColumn addProductAssociatedPartsProductName;
     public TableColumn addProductAssociatedPartsProductInv;
     public TableColumn addProductAssociatedPartsProductPrice;
+    public TextField searchParts;
 
 
     @Override
@@ -38,6 +43,33 @@ public class addProductController implements Initializable {
         addProductNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         addProductInvCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         addProductPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    public void getSearchResults(ActionEvent actionEvent) {
+        String queue = searchParts.getText();
+        ObservableList<Part> theParts = searchPartName(queue);
+
+        addProductTable.setItems(theParts);
+        searchParts.setText("");
+    }
+
+    private ObservableList<Part> searchPartName(String partialName) {
+        ObservableList<Part> selectedParts = FXCollections.observableArrayList();
+
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+
+
+        for( Part selectedPart: allParts){
+
+            if(selectedPart.getName().contains(partialName)){
+                selectedParts.add(selectedPart);
+            } else if(String.valueOf(selectedPart.getId()).contains(partialName)){
+                selectedParts.add(selectedPart);
+            }
+        }
+
+        return selectedParts;
     }
 
     public void backToMain(ActionEvent actionEvent) throws IOException {
