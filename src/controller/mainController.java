@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
@@ -22,6 +19,7 @@ import model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class mainController implements Initializable {
@@ -65,8 +63,7 @@ public class mainController implements Initializable {
     public void toModifyProduct(ActionEvent actionEvent) throws IOException {
         selectedProduct = (Product) mainProductTable.getSelectionModel().getSelectedItem();
         if(selectedProduct == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a product to modify!");
-            alert.showAndWait();
+            alertToDisplay(5);
         } else {
             selectedProductID = selectedProduct.getId();
             Parent root = FXMLLoader.load(getClass().getResource("/view/modifyProduct.fxml"));
@@ -99,8 +96,7 @@ public class mainController implements Initializable {
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
         selectedPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
         if(selectedPart == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a part to modify!");
-            alert.showAndWait();
+            alertToDisplay(4);
         } else {
             selectedID = selectedPart.getId();
             Parent root = FXMLLoader.load(getClass().getResource("/view/modifyPart.fxml"));
@@ -116,17 +112,23 @@ public class mainController implements Initializable {
     public void deletePart(ActionEvent actionEvent) throws IOException {
         Part deleted = (Part) mainPartTable.getSelectionModel().getSelectedItem();
         if(deleted == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a part to delete!");
-            alert.showAndWait();
+            alertToDisplay(3);
+        } else {
+
+            Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            newAlert.setTitle("Are you sure?");
+            newAlert.setContentText("Do you want to delete this part?");
+            Optional<ButtonType> result = newAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Inventory.deletePart(deleted);
+            }
         }
-        Inventory.deletePart(deleted);
     }
 
     public void deleteProduct(ActionEvent actionEvent) throws IOException {
      Product deleted = (Product) mainProductTable.getSelectionModel().getSelectedItem();
         if(deleted == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a product to delete!");
-            alert.showAndWait();
+            alertToDisplay(2);
         }
         Inventory.deleteProduct(deleted);
     }
@@ -182,6 +184,40 @@ public class mainController implements Initializable {
         }
 
         return selectedParts;
+    }
+
+    public static void alertToDisplay(int alertNum) {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+
+        switch (alertNum) {
+            case 1:
+                errorAlert.setTitle("ERROR");
+                errorAlert.setHeaderText("Error in your data Entry");
+                errorAlert.setContentText("Your form is not filled out correctly, please double check all values are correct and filled in");
+                errorAlert.showAndWait();
+                break;
+            case 2:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please select a product to delete!");
+                infoAlert.showAndWait();
+                break;
+            case 3:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please select a part to delete!");
+                infoAlert.showAndWait();
+                break;
+            case 4:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please select a part to modify!");
+                infoAlert.showAndWait();
+                break;
+            case 5:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please select a product to modify!");
+                infoAlert.showAndWait();
+                break;
+        }
     }
 
 }
