@@ -79,8 +79,12 @@ public class Inventory {
     }
 
     public static boolean deleteProduct(Product selectedProduct) {
-        //FIXME
-        return false;
+        if(allProducts.contains(selectedProduct)) {
+            allProducts.remove(selectedProduct);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

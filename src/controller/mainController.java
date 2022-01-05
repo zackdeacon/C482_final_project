@@ -111,7 +111,11 @@ public class mainController implements Initializable {
     }
 
     public void deleteProduct(ActionEvent actionEvent) throws IOException {
-     //FIXME
+     Product deleted = (Product) mainProductTable.getSelectionModel().getSelectedItem();
+        if(deleted == null) {
+            return;
+        }
+        Inventory.deleteProduct(deleted);
     }
 
     public void toExit(ActionEvent actionEvent) {

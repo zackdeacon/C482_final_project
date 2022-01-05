@@ -103,7 +103,7 @@ public class modifyProductController implements Initializable{
     }
 
     public void removeAssociation() {
-        Part selected = (Part) ModifyProductPartTable.getSelectionModel().getSelectedItem();
+        Part selected = (Part) ModifyProductAssociatedPartTable.getSelectionModel().getSelectedItem();
         associatedParts.remove(selected);
         ModifyProductAssociatedPartTable.setItems(associatedParts);
     }
