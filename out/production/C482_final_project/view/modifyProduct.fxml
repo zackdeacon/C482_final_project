@@ -43,7 +43,7 @@
                 </TableView>
                 <Button layoutX="763.0" layoutY="273.0" mnemonicParsing="false" text="Add" />
                 <Button layoutX="683.0" layoutY="523.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="170.0" text="Remove Associated Part" />
-                <Button layoutX="683.0" layoutY="558.0" mnemonicParsing="false" text="Save" />
+                <Button layoutX="683.0" layoutY="558.0" mnemonicParsing="false" onAction="#toUpdateProduct" text="Save" />
                 <Button layoutX="798.0" layoutY="558.0" mnemonicParsing="false" onAction="#backToMain" text="Cancel" />
             </children>
         </Pane>

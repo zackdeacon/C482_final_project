@@ -96,6 +96,17 @@ public class modifyProductController implements Initializable{
         backToMain(actionEvent);
     }
 
+    public void addAssociation() {
+        Part selected = (Part) ModifyProductPartTable.getSelectionModel().getSelectedItem();
+        associatedParts.add(selected);
+        ModifyProductAssociatedPartTable.setItems(associatedParts);
+    }
+
+    public void removeAssociation() {
+        Part selected = (Part) ModifyProductPartTable.getSelectionModel().getSelectedItem();
+        associatedParts.remove(selected);
+        ModifyProductAssociatedPartTable.setItems(associatedParts);
+    }
 
 
     public void backToMain(ActionEvent actionEvent) throws IOException {
