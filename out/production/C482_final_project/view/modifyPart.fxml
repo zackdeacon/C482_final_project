@@ -6,8 +6,12 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.modifyPartController">
     <children>
-        <RadioButton fx:id="modifyPartInHouseRadio" layoutX="134.0" layoutY="35.0" mnemonicParsing="false" text="In-House" />
-        <RadioButton fx:id="modifyPartOutsourceRadio" layoutX="256.0" layoutY="35.0" mnemonicParsing="false" text="Outsourced" />
+        <RadioButton fx:id="modifyPartInHouseRadio" layoutX="134.0" layoutY="35.0" mnemonicParsing="false" onAction="#inHouseSet" selected="true" text="In-House" >
+            <toggleGroup>
+                <ToggleGroup fx:id="tGroup" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="modifyPartOutsourceRadio" layoutX="256.0" layoutY="35.0" mnemonicParsing="false" onAction="#outSourcedSet" text="Outsourced" toggleGroup="$tGroup"/>
         <Label layoutX="68.0" layoutY="108.0" nodeOrientation="LEFT_TO_RIGHT" text="ID" />
         <Label layoutX="57.0" layoutY="146.0" nodeOrientation="LEFT_TO_RIGHT" text="Name" />
         <Label layoutX="65.0" layoutY="183.0" text="Inv" />

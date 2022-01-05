@@ -61,6 +61,14 @@ public class modifyPartController implements Initializable {
         }
     }
 
+    public void outSourcedSet(ActionEvent actionEvent) {
+        modifyPartMachineIDLabel.setText("Company Name");
+    }
+
+    public void inHouseSet(ActionEvent actionEvent) {
+        modifyPartMachineIDLabel.setText("Machine ID");
+    }
+
     public void saveModifications(ActionEvent actionEvent) throws IOException{
         if(modifyPartInHouseRadio.isSelected()){
             Part newPart = new inHouse(selectedID, modifyPartName.getText(), Double.parseDouble(modifyPartPriceCost.getText()), Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()), Integer.parseInt(modifyPartMachineID.getText()));
