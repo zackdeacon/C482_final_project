@@ -123,7 +123,7 @@ public class mainController implements Initializable {
     }
 
     public void getSearchResults(ActionEvent actionEvent) {
-        String queue = partSearch.getText();
+        String queue = partSearch.getText().toLowerCase();
         ObservableList<Part> theParts = searchPartName(queue);
 
         mainPartTable.setItems(theParts);
@@ -131,7 +131,7 @@ public class mainController implements Initializable {
     }
 
     public void getProductSearchResults(ActionEvent actionEvent) {
-        String queue = productSearch.getText();
+        String queue = productSearch.getText().toLowerCase();
         ObservableList<Product> theProducts = searchProductName(queue);
 
         mainProductTable.setItems(theProducts);
@@ -143,7 +143,7 @@ public class mainController implements Initializable {
         ObservableList<Product> allProducts = Inventory.getAllProducts();
 
         for( Product selectedProduct: allProducts){
-            if(selectedProduct.getName().contains(partialName)){
+            if(selectedProduct.getName().toLowerCase().contains(partialName)){
                 selectedProducts.add(selectedProduct);
             } else if(String.valueOf(selectedProduct.getId()).contains(partialName)){
                 selectedProducts.add(selectedProduct);
@@ -161,7 +161,7 @@ public class mainController implements Initializable {
 
         for( Part selectedPart: allParts){
 
-            if(selectedPart.getName().contains(partialName)){
+            if(selectedPart.getName().toLowerCase().contains(partialName)){
                 selectedParts.add(selectedPart);
             } else if(String.valueOf(selectedPart.getId()).contains(partialName)){
                 selectedParts.add(selectedPart);
