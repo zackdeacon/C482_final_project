@@ -76,7 +76,7 @@ public class mainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/addProduct.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 900, 650);
-        stage.setTitle("Modify Product Page");
+        stage.setTitle("Add Product Page");
         stage.setScene(scene);
         stage.show();
     }
