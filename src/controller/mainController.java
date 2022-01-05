@@ -64,13 +64,18 @@ public class mainController implements Initializable {
 
     public void toModifyProduct(ActionEvent actionEvent) throws IOException {
         selectedProduct = (Product) mainProductTable.getSelectionModel().getSelectedItem();
-        selectedProductID = selectedProduct.getId();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/modifyProduct.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 650);
-        stage.setTitle("Modify Product Page");
-        stage.setScene(scene);
-        stage.show();
+        if(selectedProduct == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a product to modify!");
+            alert.showAndWait();
+        } else {
+            selectedProductID = selectedProduct.getId();
+            Parent root = FXMLLoader.load(getClass().getResource("/view/modifyProduct.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 900, 650);
+            stage.setTitle("Modify Product Page");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void toAddProduct(ActionEvent actionEvent) throws IOException {
@@ -93,11 +98,11 @@ public class mainController implements Initializable {
 
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
         selectedPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
-        selectedID = selectedPart.getId();
         if(selectedPart == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a part to modify!");
             alert.showAndWait();
         } else {
+            selectedID = selectedPart.getId();
             Parent root = FXMLLoader.load(getClass().getResource("/view/modifyPart.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 900, 650);
