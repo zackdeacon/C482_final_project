@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
+import model.Product;
 
 
 import java.io.IOException;
@@ -76,6 +77,26 @@ public class modifyProductController implements Initializable{
         ModifyProductAssociatedPartTable.setItems(associatedParts);
 
     }
+
+    public void toUpdateProduct(ActionEvent actionEvent) throws IOException{
+        String newName = modifyProductName.getText();
+        double newPrice = Double.parseDouble(modifyProductPrice.getText());
+        int newStock = Integer.parseInt(modifyProductInv.getText());
+        int newMin = Integer.parseInt(modifyProductMin.getText());
+        int newMax = Integer.parseInt(modifyProductMax.getText());
+
+        Product product = new Product(selectedProductID, newName, newPrice, newStock, newMin, newMax);
+
+        for(Part part : associatedParts) {
+            product.addAssociatedPart(part);
+        }
+
+        Inventory.updateProduct((selectedProductID-1), product);
+
+        backToMain(actionEvent);
+    }
+
+
 
     public void backToMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
