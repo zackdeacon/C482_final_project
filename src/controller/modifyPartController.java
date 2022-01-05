@@ -74,6 +74,8 @@ public class modifyPartController implements Initializable {
         backToMain(actionEvent);
     }
 
+
+
     public void backToMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();

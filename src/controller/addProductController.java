@@ -19,6 +19,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import static model.Inventory.getNewProductID;
 
@@ -60,7 +61,7 @@ public class addProductController implements Initializable {
     }
 
     public void getSearchResults(ActionEvent actionEvent) {
-        String queue = searchParts.getText();
+        String queue = searchParts.getText().toLowerCase();
         ObservableList<Part> theParts = searchPartName(queue);
 
         addProductTable.setItems(theParts);
@@ -74,7 +75,7 @@ public class addProductController implements Initializable {
 
         for(Part selectedPart: allParts){
 
-            if(selectedPart.getName().contains(partialName)){
+            if(selectedPart.getName().toLowerCase().contains(partialName)){
                 selectedParts.add(selectedPart);
             } else if(String.valueOf(selectedPart.getId()).contains(partialName)){
                 selectedParts.add(selectedPart);

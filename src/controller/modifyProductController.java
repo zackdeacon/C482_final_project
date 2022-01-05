@@ -43,6 +43,7 @@ public class modifyProductController implements Initializable{
     public TextField modifyProductMax;
     public TextField modifyProductMin;
     public TextField modifyProductPrice;
+    public TextField modifyProductSearchBox;
 
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
@@ -107,6 +108,31 @@ public class modifyProductController implements Initializable{
         Part selected = (Part) ModifyProductAssociatedPartTable.getSelectionModel().getSelectedItem();
         associatedParts.remove(selected);
         ModifyProductAssociatedPartTable.setItems(associatedParts);
+    }
+
+    public void getSearchResults(ActionEvent actionEvent) {
+        String queue = modifyProductSearchBox.getText().toLowerCase();
+        ObservableList<Part> theParts = searchPartName(queue);
+
+        ModifyProductPartTable.setItems(theParts);
+        modifyProductSearchBox.setText("");
+    }
+
+    private ObservableList<Part> searchPartName(String partialName) {
+        ObservableList<Part> selectedParts = FXCollections.observableArrayList();
+
+        ObservableList<Part> allParts = Inventory.getAllParts();
+
+        for(Part selectedPart: allParts){
+
+            if(selectedPart.getName().toLowerCase().contains(partialName)){
+                selectedParts.add(selectedPart);
+            } else if(String.valueOf(selectedPart.getId()).contains(partialName)){
+                selectedParts.add(selectedPart);
+            }
+        }
+
+        return selectedParts;
     }
 
 
