@@ -64,10 +64,12 @@ public class modifyPartController implements Initializable {
     public void saveModifications(ActionEvent actionEvent) throws IOException{
         if(modifyPartInHouseRadio.isSelected()){
             Part newPart = new inHouse(selectedID, modifyPartName.getText(), Double.parseDouble(modifyPartPriceCost.getText()), Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()), Integer.parseInt(modifyPartMachineID.getText()));
-            Inventory.updatePart((selectedID-1), newPart);
+            Inventory.addPart(newPart);
+            Inventory.deletePart(selectedPart);
         } else if(modifyPartOutsourceRadio.isSelected()) {
             Part newPart = new outSourced(selectedID, modifyPartName.getText(), Double.parseDouble(modifyPartPriceCost.getText()), Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()), modifyPartMachineID.getText());
-            Inventory.updatePart((selectedID-1), newPart);
+            Inventory.addPart(newPart);
+            Inventory.deletePart(selectedPart);
         }
         backToMain(actionEvent);
     }

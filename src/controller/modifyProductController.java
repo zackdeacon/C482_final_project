@@ -91,7 +91,8 @@ public class modifyProductController implements Initializable{
             product.addAssociatedPart(part);
         }
 
-        Inventory.updateProduct((selectedProductID-1), product);
+        Inventory.addProduct(product);
+        Inventory.deleteProduct(selectedProduct);
 
         backToMain(actionEvent);
     }
