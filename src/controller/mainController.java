@@ -130,7 +130,22 @@ public class mainController implements Initializable {
         if(deleted == null) {
             alertToDisplay(2);
         }
-        Inventory.deleteProduct(deleted);
+        else {
+
+            Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            newAlert.setTitle("Are you sure?");
+            newAlert.setContentText("Do you want to delete this product?");
+            Optional<ButtonType> result = newAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                ObservableList<Part> associatedParts = deleted.getAllAssociatedParts();
+                if(associatedParts.size()>0) {
+                    alertToDisplay(6);
+                } else {
+
+                    Inventory.deleteProduct(deleted);
+                }
+            }
+        }
     }
 
     public void toExit(ActionEvent actionEvent) {
@@ -215,6 +230,11 @@ public class mainController implements Initializable {
             case 5:
                 infoAlert.setTitle("ERROR");
                 infoAlert.setHeaderText("Please select a product to modify!");
+                infoAlert.showAndWait();
+                break;
+            case 6:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please remove this product's associated parts before deleting!");
                 infoAlert.showAndWait();
                 break;
         }
