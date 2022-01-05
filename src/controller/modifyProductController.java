@@ -8,9 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
@@ -20,6 +18,7 @@ import model.Product;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static controller.mainController.selectedProductID;
@@ -106,8 +105,18 @@ public class modifyProductController implements Initializable{
 
     public void removeAssociation() {
         Part selected = (Part) ModifyProductAssociatedPartTable.getSelectionModel().getSelectedItem();
-        associatedParts.remove(selected);
-        ModifyProductAssociatedPartTable.setItems(associatedParts);
+        if(selected == null){
+            controller.mainController.alertToDisplay(7);
+        } else {
+            Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            newAlert.setTitle("Are you sure?");
+            newAlert.setContentText("Do you want to remove this associated part?");
+            Optional<ButtonType> result = newAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                associatedParts.remove(selected);
+                ModifyProductAssociatedPartTable.setItems(associatedParts);
+            }
+        }
     }
 
     public void getSearchResults(ActionEvent actionEvent) {

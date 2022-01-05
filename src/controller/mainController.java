@@ -237,6 +237,11 @@ public class mainController implements Initializable {
                 infoAlert.setHeaderText("Please remove this product's associated parts before deleting!");
                 infoAlert.showAndWait();
                 break;
+            case 7:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please select a part to remove!");
+                infoAlert.showAndWait();
+                break;
         }
     }
 

@@ -8,9 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Inventory;
@@ -20,6 +18,7 @@ import model.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import static model.Inventory.getNewProductID;
 
@@ -93,8 +92,18 @@ public class addProductController implements Initializable {
 
     public void toRemoveAssociation() {
         Part selectedPart = (Part) addProductAssociatedPartsTable.getSelectionModel().getSelectedItem();
-        associatedParts.remove(selectedPart);
-        addProductAssociatedPartsTable.setItems(associatedParts);
+        if(selectedPart == null){
+            controller.mainController.alertToDisplay(7);
+        } else {
+            Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            newAlert.setTitle("Are you sure?");
+            newAlert.setContentText("Do you want to remove this associated part?");
+            Optional<ButtonType> result = newAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                associatedParts.remove(selectedPart);
+                addProductAssociatedPartsTable.setItems(associatedParts);
+            }
+        }
     }
 
     public void toSaveProduct(ActionEvent actionEvent) throws IOException {
