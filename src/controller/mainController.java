@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -93,19 +94,25 @@ public class mainController implements Initializable {
     public void toModifyPart(ActionEvent actionEvent) throws IOException {
         selectedPart = (Part) mainPartTable.getSelectionModel().getSelectedItem();
         selectedID = selectedPart.getId();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/modifyPart.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 650);
-        stage.setTitle("Modify Part Page");
-        stage.setScene(scene);
-        stage.show();
+        if(selectedPart == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a part to modify!");
+            alert.showAndWait();
+        } else {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/modifyPart.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 900, 650);
+            stage.setTitle("Modify Part Page");
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
     public void deletePart(ActionEvent actionEvent) throws IOException {
         Part deleted = (Part) mainPartTable.getSelectionModel().getSelectedItem();
         if(deleted == null) {
-            return;
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a part to delete!");
+            alert.showAndWait();
         }
         Inventory.deletePart(deleted);
     }
@@ -113,7 +120,8 @@ public class mainController implements Initializable {
     public void deleteProduct(ActionEvent actionEvent) throws IOException {
      Product deleted = (Product) mainProductTable.getSelectionModel().getSelectedItem();
         if(deleted == null) {
-            return;
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a product to delete!");
+            alert.showAndWait();
         }
         Inventory.deleteProduct(deleted);
     }
