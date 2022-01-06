@@ -213,6 +213,9 @@ public class mainController implements Initializable {
     public static boolean checkInv(int stock, int min, int max) {
         boolean valid = true;
         if(stock > max || stock < min) {
+            System.out.println("min: " + min);
+            System.out.println("max: " + max);
+            System.out.println("stock: " + stock);
             valid = false;
             alertToDisplay(9);
         }

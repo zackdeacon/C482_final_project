@@ -14,13 +14,14 @@ import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
 import model.Product;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import static model.Inventory.getNewProductID;
+import static controller.mainController.alertToDisplay;
+import static controller.mainController.checkInv;
+import static controller.mainController.checkMinVal;
 
 public class addProductController implements Initializable {
 
@@ -107,19 +108,28 @@ public class addProductController implements Initializable {
     }
 
     public void toSaveProduct(ActionEvent actionEvent) throws IOException {
-        String newName = addProductName.getText();
-        double newPrice = Double.parseDouble(addProductPrice.getText());
-        int newStock = Integer.parseInt(addProductInv.getText());
-        int newMin = Integer.parseInt(addProductMin.getText());
-        int newMax = Integer.parseInt(addProductMax.getText());
+        try {
+            String newName = addProductName.getText();
+            double newPrice = Double.parseDouble(addProductPrice.getText());
+            int newStock = Integer.parseInt(addProductInv.getText());
+            int newMin = Integer.parseInt(addProductMin.getText());
+            int newMax = Integer.parseInt(addProductMax.getText());
 
-        Product product = new Product(getNewProductID(), newName, newPrice, newStock, newMin, newMax);
-        for(Part part : associatedParts) {
-            product.addAssociatedPart(part);
+            if(newName.isEmpty() || !newName.matches("^[\\p{L} .'-]+$")){
+                alertToDisplay(10);
+            } else {
+                if (checkInv(newStock, newMin, newMax) && checkMinVal(newMin, newMax)) {
+                    Product product = new Product(getNewProductID(), newName, newPrice, newStock, newMin, newMax);
+                    for (Part part : associatedParts) {
+                        product.addAssociatedPart(part);
+                    }
+                    Inventory.addProduct(product);
+                    backToMain(actionEvent);
+                }
+            }
+        } catch(Exception e){
+            alertToDisplay(1);
         }
-        Inventory.addProduct(product);
-
-        backToMain(actionEvent);
     }
 
     public void backToMain(ActionEvent actionEvent) throws IOException {

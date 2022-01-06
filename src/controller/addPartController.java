@@ -59,7 +59,7 @@ public class addPartController implements Initializable {
             int newMax = Integer.parseInt(addPartMax.getText());
             boolean success = false;
 
-            if(newName.isEmpty() || !newName.matches("^[a-zA-Z]+$")){
+            if(newName.isEmpty() || !newName.matches("^[\\p{L} .'-]+$")){
                 controller.mainController.alertToDisplay(10);
             } else {
                 if(controller.mainController.checkInv(newInv, newMin, newMax) && controller.mainController.checkMinVal(newMin, newMax)) {

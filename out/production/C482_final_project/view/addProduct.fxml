@@ -18,8 +18,8 @@
             <TextField fx:id="addProductName" layoutX="104.0" layoutY="176.0" />
             <TextField fx:id="addProductInv" layoutX="104.0" layoutY="219.0" prefHeight="27.0" prefWidth="79.0" />
             <TextField fx:id="addProductPrice" layoutX="104.0" layoutY="264.0" prefHeight="27.0" prefWidth="79.0" />
-            <TextField fx:id="addProductMin" layoutX="104.0" layoutY="312.0" prefHeight="27.0" prefWidth="79.0" />
-            <TextField fx:id="addProductMax" layoutX="251.0" layoutY="312.0" prefHeight="27.0" prefWidth="79.0" />
+            <TextField fx:id="addProductMax" layoutX="104.0" layoutY="312.0" prefHeight="27.0" prefWidth="79.0" />
+            <TextField fx:id="addProductMin" layoutX="251.0" layoutY="312.0" prefHeight="27.0" prefWidth="79.0" />
             <Label layoutX="49.0" layoutY="141.0" text="ID" />
             <Label layoutX="49.0" layoutY="181.0" text="Name" />
             <Label layoutX="49.0" layoutY="224.0" text="Inv" />

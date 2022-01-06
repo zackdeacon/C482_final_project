@@ -23,6 +23,9 @@ import java.util.ResourceBundle;
 
 import static controller.mainController.selectedProductID;
 import static controller.mainController.selectedProduct;
+import static controller.mainController.alertToDisplay;
+import static controller.mainController.checkInv;
+import static controller.mainController.checkMinVal;
 
 public class modifyProductController implements Initializable{
 
@@ -79,22 +82,29 @@ public class modifyProductController implements Initializable{
     }
 
     public void toUpdateProduct(ActionEvent actionEvent) throws IOException{
-        String newName = modifyProductName.getText();
-        double newPrice = Double.parseDouble(modifyProductPrice.getText());
-        int newStock = Integer.parseInt(modifyProductInv.getText());
-        int newMin = Integer.parseInt(modifyProductMin.getText());
-        int newMax = Integer.parseInt(modifyProductMax.getText());
+        try {
+            String newName = modifyProductName.getText();
+            double newPrice = Double.parseDouble(modifyProductPrice.getText());
+            int newStock = Integer.parseInt(modifyProductInv.getText());
+            int newMin = Integer.parseInt(modifyProductMin.getText());
+            int newMax = Integer.parseInt(modifyProductMax.getText());
 
-        Product product = new Product(selectedProductID, newName, newPrice, newStock, newMin, newMax);
-
-        for(Part part : associatedParts) {
-            product.addAssociatedPart(part);
+            if(newName.isEmpty() || !newName.matches("^[\\p{L} .'-]+$")){
+                alertToDisplay(10);
+            } else {
+                if (checkInv(newStock, newMin, newMax) && checkMinVal(newMin, newMax)) {
+                    Product product = new Product(selectedProductID, newName, newPrice, newStock, newMin, newMax);
+                    for (Part part : associatedParts) {
+                        product.addAssociatedPart(part);
+                    }
+                    Inventory.addProduct(product);
+                    Inventory.deleteProduct(selectedProduct);
+                    backToMain(actionEvent);
+                }
+            }
+        }catch(Exception e){
+            alertToDisplay(1);
         }
-
-        Inventory.addProduct(product);
-        Inventory.deleteProduct(selectedProduct);
-
-        backToMain(actionEvent);
     }
 
     public void addAssociation() {

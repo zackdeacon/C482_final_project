@@ -73,7 +73,7 @@ public class modifyPartController implements Initializable {
         try {
             boolean success = false;
 
-            if(modifyPartName.getText().isEmpty() || !modifyPartName.getText().matches("^[a-zA-Z]+$")){
+            if(modifyPartName.getText().isEmpty() || !modifyPartName.getText().matches("^[\\p{L} .'-]+$")){
                 controller.mainController.alertToDisplay(10);
             } else {
                 if (controller.mainController.checkInv(Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText())) && controller.mainController.checkMinVal(Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()))) {
