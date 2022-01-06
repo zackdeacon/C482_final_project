@@ -219,6 +219,14 @@ public class mainController implements Initializable {
             return valid;
     }
 
+    public static boolean doubleTest(Object any) {
+        return any instanceof Double;
+    }
+
+    public static boolean stringTest(Object any) {
+        return any instanceof String;
+    }
+
     public static void alertToDisplay(int alertNum) {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);

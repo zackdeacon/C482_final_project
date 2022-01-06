@@ -70,16 +70,38 @@ public class modifyPartController implements Initializable {
     }
 
     public void saveModifications(ActionEvent actionEvent) throws IOException{
-        if(modifyPartInHouseRadio.isSelected()){
-            Part newPart = new inHouse(selectedID, modifyPartName.getText(), Double.parseDouble(modifyPartPriceCost.getText()), Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()), Integer.parseInt(modifyPartMachineID.getText()));
-            Inventory.addPart(newPart);
-            Inventory.deletePart(selectedPart);
-        } else if(modifyPartOutsourceRadio.isSelected()) {
-            Part newPart = new outSourced(selectedID, modifyPartName.getText(), Double.parseDouble(modifyPartPriceCost.getText()), Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()), modifyPartMachineID.getText());
-            Inventory.addPart(newPart);
-            Inventory.deletePart(selectedPart);
+        try {
+            boolean success = false;
+
+            if(modifyPartName.getText().isEmpty() || !modifyPartName.getText().matches("^[a-zA-Z]+$")){
+                controller.mainController.alertToDisplay(10);
+            } else {
+                if (controller.mainController.checkInv(Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText())) && controller.mainController.checkMinVal(Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()))) {
+
+
+                    if (modifyPartInHouseRadio.isSelected()) {
+                        try{
+                        Part newPart = new inHouse(selectedID, modifyPartName.getText(), Double.parseDouble(modifyPartPriceCost.getText()), Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()), Integer.parseInt(modifyPartMachineID.getText()));
+                        Inventory.addPart(newPart);
+                        Inventory.deletePart(selectedPart);
+                        success = true;
+                    }catch (Exception e) {
+                            controller.mainController.alertToDisplay(11);
+                        }
+                    } else if (modifyPartOutsourceRadio.isSelected()) {
+                        Part newPart = new outSourced(selectedID, modifyPartName.getText(), Double.parseDouble(modifyPartPriceCost.getText()), Integer.parseInt(modifyPartInv.getText()), Integer.parseInt(modifyPartMin.getText()), Integer.parseInt(modifyPartMax.getText()), modifyPartMachineID.getText());
+                        Inventory.addPart(newPart);
+                        Inventory.deletePart(selectedPart);
+                        success = true;
+                    }
+                    if (success) {
+                        backToMain(actionEvent);
+                    }
+                }
+            }
+        }catch(Exception e){
+            controller.mainController.alertToDisplay(1);
         }
-        backToMain(actionEvent);
     }
 
 
