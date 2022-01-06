@@ -280,7 +280,7 @@ public class mainController implements Initializable {
                 if(associatedParts.size()>0) {
                     alertToDisplay(6);
                 } else {
-
+                System.out.println("should delete!");
                     Inventory.deleteProduct(deleted);
                 }
             }

@@ -11,6 +11,8 @@ import static model.Inventory.getNewProductID;
 
 /**
  *
+ * JavaDoc files stored in src folder
+ *
  * See below for FUTURE ENHANCEMENT
  *
  * The Inventory Management program which creates and uses an application for managing
