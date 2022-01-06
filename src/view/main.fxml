@@ -23,7 +23,7 @@
             </columns>
         </TableView>
         <Label layoutX="483.0" layoutY="97.0" text="Products" />
-        <TextField fx:id="productSearch" layoutX="658.0" layoutY="92.0" onAction="#getProductSearchResults"/>
+        <TextField fx:id="productSearch" layoutX="658.0" layoutY="92.0" onAction="#getProductSearchResults" promptText="Search by ID or Name"/>
         <Button layoutX="676.0" layoutY="330.0" mnemonicParsing="false" onAction="#toAddProduct" text="Add" />
         <Button layoutX="724.0" layoutY="330.0" mnemonicParsing="false" onAction="#toModifyProduct" text="Modify" />
         <Button layoutX="792.0" layoutY="330.0" mnemonicParsing="false" onAction="#deleteProduct" text="Delete" />
@@ -41,7 +41,7 @@
               </columns>
             </TableView>
             <Label layoutX="20.0" layoutY="27.0" text="Parts" />
-            <TextField fx:id="partSearch" layoutX="208.0" layoutY="22.0" onAction="#getSearchResults"/>
+            <TextField fx:id="partSearch" layoutX="208.0" layoutY="22.0" onAction="#getSearchResults" promptText="Search by ID or Name"/>
             <Button layoutX="220.0" layoutY="263.0" mnemonicParsing="false" onAction="#toAddPart" text="Add" />
             <Button layoutX="272.0" layoutY="263.0" mnemonicParsing="false" onAction="#toModifyPart" text="Modify" />
             <Button layoutX="341.0" layoutY="263.0" mnemonicParsing="false" onAction="#deletePart" text="Delete" />

@@ -13,7 +13,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="searchParts" layoutX="703.0" layoutY="19.0" text="search" onAction="#getSearchResults"/>
+            <TextField fx:id="searchParts" layoutX="703.0" layoutY="19.0" promptText="Search by ID or Name" onAction="#getSearchResults"/>
             <TextField fx:id="addProductID" layoutX="104.0" layoutY="136.0" disable="true" text="Auto Gen-Disabled"/>
             <TextField fx:id="addProductName" layoutX="104.0" layoutY="176.0" />
             <TextField fx:id="addProductInv" layoutX="104.0" layoutY="219.0" prefHeight="27.0" prefWidth="79.0" />
