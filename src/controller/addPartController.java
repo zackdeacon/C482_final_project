@@ -50,22 +50,43 @@ public class addPartController implements Initializable {
     }
 
     public void saveAddPart(ActionEvent actionEvent) throws IOException{
-        String newName = addPartName.getText();
-        double newPrice = Double.parseDouble(addPartPriceCost.getText());
-        int newInv = Integer.parseInt(addPartInv.getText());
-        int newMin = Integer.parseInt(addPartMin.getText());
-        int newMax = Integer.parseInt(addPartMax.getText());
+        try {
+            String newName = addPartName.getText();
+            double newPrice = Double.parseDouble(addPartPriceCost.getText());
+            int newInv = Integer.parseInt(addPartInv.getText());
+            int newMin = Integer.parseInt(addPartMin.getText());
+            int newMax = Integer.parseInt(addPartMax.getText());
+            boolean success = false;
 
-        if(addPartOutsourceRadio.isSelected()){
-            String companyName = addPartMachineID.getText();
-            outSourced part = new outSourced(getNewPartID(), newName, newPrice, newInv, newMin, newMax, companyName);
-            Inventory.addPart(part);
-        } else if(addPartInHouseRadio.isSelected()) {
-            int newMachineID = Integer.parseInt(addPartMachineID.getText());
-            inHouse part = new inHouse(getNewPartID(), newName, newPrice, newInv, newMin, newMax, newMachineID);
-            Inventory.addPart(part);
+            if(newName.isEmpty()){
+                controller.mainController.alertToDisplay(10);
+            } else {
+                if(controller.mainController.checkInv(newInv, newMin, newMax) && controller.mainController.checkMinVal(newMin, newMax)) {
+
+                    if (addPartOutsourceRadio.isSelected()) {
+                            String companyName = addPartMachineID.getText();
+                            outSourced part = new outSourced(getNewPartID(), newName, newPrice, newInv, newMin, newMax, companyName);
+                            Inventory.addPart(part);
+                            success = true;
+
+                    } if (addPartInHouseRadio.isSelected()) {
+                    try {
+                        int newMachineID = Integer.parseInt(addPartMachineID.getText());
+                        inHouse part = new inHouse(getNewPartID(), newName, newPrice, newInv, newMin, newMax, newMachineID);
+                        Inventory.addPart(part);
+                        success = true;
+                    } catch (Exception e) {
+                        controller.mainController.alertToDisplay(11);
+                    }
+                }
+                    if(success) {
+                        backToMain(actionEvent);
+                    }
+                }
+            }
+        } catch(Exception e) {
+            controller.mainController.alertToDisplay(1);
         }
-        backToMain(actionEvent);
     }
 
     public void outSourcedSet(ActionEvent actionEvent) {

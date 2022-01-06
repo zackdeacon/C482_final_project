@@ -201,6 +201,24 @@ public class mainController implements Initializable {
         return selectedParts;
     }
 
+    public static boolean checkMinVal(int min, int max) {
+        if(min < 0 || min > max) {
+            alertToDisplay(8);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean checkInv(int stock, int min, int max) {
+        boolean valid = true;
+        if(stock > max || stock < min) {
+            valid = false;
+            alertToDisplay(9);
+        }
+            return valid;
+    }
+
     public static void alertToDisplay(int alertNum) {
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -240,6 +258,26 @@ public class mainController implements Initializable {
             case 7:
                 infoAlert.setTitle("ERROR");
                 infoAlert.setHeaderText("Please select a part to remove!");
+                infoAlert.showAndWait();
+                break;
+            case 8:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Min and Max values are not correct. Min must be <= Max");
+                infoAlert.showAndWait();
+                break;
+            case 9:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Invalid Inventory amount");
+                infoAlert.showAndWait();
+                break;
+            case 10:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please make sure you have entered a valid Name");
+                infoAlert.showAndWait();
+                break;
+            case 11:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please make sure Machine ID consists of numbers only");
                 infoAlert.showAndWait();
                 break;
         }
