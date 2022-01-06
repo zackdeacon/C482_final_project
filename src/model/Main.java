@@ -10,11 +10,14 @@ import static model.Inventory.getNewPartID;
 import static model.Inventory.getNewProductID;
 
 /**
+ *
+ * See below for FUTURE ENHANCEMENT
+ *
  * The Inventory Management program which creates and uses an application for managing
  * an inventory of parts and products consisting of parts.
  *
  * A feature to consider adding for future iterations of this project could be allowing for drag and drop functionality
- * to combine parts with products. Also, you could design for more functionality on whichh and how many parts can be
+ * to combine parts with products. Also, you could design for more functionality on which and how many parts can be
  * assigned to each product.
  *
  * @author Zachary Deacon

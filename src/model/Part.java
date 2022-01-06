@@ -3,8 +3,9 @@ package model; /**
  */
 
 /**
+ * Class was provided by WGU
  *
- * @author WGU
+ * @author Place Your Name Here
  */
 public abstract class Part {
     private int id;

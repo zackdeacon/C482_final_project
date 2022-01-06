@@ -48,6 +48,15 @@ import static controller.mainController.checkMinVal;
 /**
  * Controller class that provides control logic for the modify product screen of the application.
  *
+ * LOGICAL ERROR
+ * Initially I was using the updateProduct method (from the Product class) in the toUpdateProduct method below. I was
+ * using selectedProductID - 1 as an index for the updateProduct method and initially things worked fine. Soon I found
+ * that when you had deleted multiple products the indexing of selectedProductID -1 no longer worked. For example, let's
+ * say you had 10 products but deleted 8 of them (product IDs of 2-9). If you tried to then update product with ID of 10,
+ * it would break the code as it would try to update at index of 10 -1 when there are only 2 products left in the list.
+ * So instead I manually delted the product and added a new one on to the end of the list to avoid having to set based
+ * on index. See toUpdateProduct method below.
+ *
  * @author Zachary Deacon
  */
 public class modifyProductController implements Initializable{
