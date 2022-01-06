@@ -9,8 +9,26 @@ import javafx.stage.Stage;
 import static model.Inventory.getNewPartID;
 import static model.Inventory.getNewProductID;
 
+/**
+ * The Inventory Management program which creates and uses an application for managing
+ * an inventory of parts and products consisting of parts.
+ *
+ * A feature to consider adding for future iterations of this project could be allowing for drag and drop functionality
+ * to combine parts with products. Also, you could design for more functionality on whichh and how many parts can be
+ * assigned to each product.
+ *
+ * @author Zachary Deacon
+ *
+ */
+
 public class Main extends Application {
 
+    /**
+     * The start method creates the FXML stage and loads the initial scene.
+     *
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -27,6 +45,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Helper function that creates sample data, to be called inside of Start method.
+     *
+     */
     private void addTestData() {
         inHouse radiator = new inHouse(getNewPartID(), "radiator",100.0, 3, 1, 3, 34 );
         inHouse wheel = new inHouse(getNewPartID(), "wheel",110.0, 4, 1, 16, 3 );
@@ -44,7 +66,11 @@ public class Main extends Application {
         Inventory.addProduct(quad);
     }
 
-
+    /**
+     * The main method is the entry point of the application. It launches the application.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         launch(args);

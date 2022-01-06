@@ -4,7 +4,7 @@ package model; /**
 
 /**
  *
- * @author Zachary Deacon
+ * @author WGU
  */
 public abstract class Part {
     private int id;
