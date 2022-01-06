@@ -3,6 +3,7 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -14,39 +15,148 @@ import javafx.stage.Stage;
 import model.Inventory;
 import model.Part;
 import model.Product;
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * The ID for the user selected product in main controller.
+ */
 import static controller.mainController.selectedProductID;
+
+/**
+ * The user selected product in main controller.
+ */
 import static controller.mainController.selectedProduct;
+
+/**
+ * function imported from main controller to help display alerts.
+ */
 import static controller.mainController.alertToDisplay;
+
+/**
+ * function imported from main controller to help validate inventory.
+ */
 import static controller.mainController.checkInv;
+
+/**
+ * function imported from main controller to help validate user input minimum.
+ */
 import static controller.mainController.checkMinVal;
 
+/**
+ * Controller class that provides control logic for the modify product screen of the application.
+ *
+ * @author Zachary Deacon
+ */
 public class modifyProductController implements Initializable{
 
+    /**
+     * The modify products part table view.
+     */
+    @FXML
     public TableView ModifyProductPartTable;
+
+    /**
+     * The associated parts table view.
+     */
+    @FXML
     public TableView ModifyProductAssociatedPartTable;
+
+    /**
+     * The modify products Part ID column for part table.
+     */
+    @FXML
     public TableColumn ModifyProductPartID;
+
+    /**
+     * The modify products Part Name column for part table.
+     */
+    @FXML
     public TableColumn ModifyProductPartName;
+
+    /**
+     * The modify products Part Stock column for part table.
+     */
+    @FXML
     public TableColumn ModifyProductPartInv;
+
+    /**
+     * The modify products Part Price column for part table.
+     */
+    @FXML
     public TableColumn ModifyProductPartPrice;
+
+    /**
+     * The modify products Part ID column for associated part table.
+     */
+    @FXML
     public TableColumn ModifyProductAssociatedPartID;
+
+    /**
+     * The modify products Part Name column for associated part table.
+     */
+    @FXML
     public TableColumn ModifyProductAssociatedPartName;
+
+    /**
+     * The modify products Part Stock column for associated part table.
+     */
+    @FXML
     public TableColumn ModifyProductAssociatedPartInv;
+
+    /**
+     * The modify products Part Price column for associated part table.
+     */
+    @FXML
     public TableColumn ModifyProductAssociatedPartPrice;
+
+    /**
+     * The modify products Product ID text field.
+     */
+    @FXML
     public TextField modifyProductID;
+
+    /**
+     * The modify products Product Name text field.
+     */
+    @FXML
     public TextField modifyProductName;
+
+    /**
+     * The modify products Product Stock text field.
+     */
+    @FXML
     public TextField modifyProductInv;
+
+    /**
+     * The modify products Product Maximum text field.
+     */
+    @FXML
     public TextField modifyProductMax;
+
+    /**
+     * The modify products Product Minimum text field.
+     */
+    @FXML
     public TextField modifyProductMin;
+
+    /**
+     * The modify products Product Price text field.
+     */
+    @FXML
     public TextField modifyProductPrice;
+
+    /**
+     * The modify products Product Search text field.
+     */
+    @FXML
     public TextField modifyProductSearchBox;
 
+    /**
+     * A list of parts associated with the product.
+     */
     private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
 
     @Override
@@ -56,6 +166,10 @@ public class modifyProductController implements Initializable{
         setPage();
     }
 
+    /**
+     * Populates text fields and table with products and parts selected in MainController.
+     */
+    @FXML
     public void setPage() {
 
         associatedParts = selectedProduct.getAllAssociatedParts();
@@ -81,6 +195,16 @@ public class modifyProductController implements Initializable{
 
     }
 
+    /**
+     * Replaces product in inventory and loads MainController.
+     *
+     * Text fields are validated with error messages displayed preventing empty and/or
+     * invalid values.
+     *
+     * @param actionEvent Save button action.
+     * @throws IOException From FXMLLoader.
+     */
+    @FXML
     public void toUpdateProduct(ActionEvent actionEvent) throws IOException{
         try {
             String newName = modifyProductName.getText();
@@ -107,12 +231,24 @@ public class modifyProductController implements Initializable{
         }
     }
 
+    /**
+     * Adds selected part to Products associated parts list.
+     *
+     */
+    @FXML
     public void addAssociation() {
         Part selected = (Part) ModifyProductPartTable.getSelectionModel().getSelectedItem();
         associatedParts.add(selected);
         ModifyProductAssociatedPartTable.setItems(associatedParts);
     }
 
+    /**
+     * Displays confirmation dialog and removes selected part from associated parts table.
+     *
+     * Displays error message if no part is selected.
+     *
+     */
+    @FXML
     public void removeAssociation() {
         Part selected = (Part) ModifyProductAssociatedPartTable.getSelectionModel().getSelectedItem();
         if(selected == null){
@@ -129,6 +265,15 @@ public class modifyProductController implements Initializable{
         }
     }
 
+    /**
+     * Initiates a search based on value in parts search text field and refreshes the parts
+     * table view with search results.
+     *
+     * Parts can be searched for by ID or name.
+     *
+     * @param actionEvent Part search button action.
+     */
+    @FXML
     public void getSearchResults(ActionEvent actionEvent) {
         String queue = modifyProductSearchBox.getText().toLowerCase();
         ObservableList<Part> theParts = searchPartName(queue);
@@ -137,6 +282,14 @@ public class modifyProductController implements Initializable{
         modifyProductSearchBox.setText("");
     }
 
+    /**
+     * Helper function for getSearchResults method.
+     *
+     * Parts can be searched for by ID or name.
+     *
+     * @param partialName user input to search for.
+     */
+    @FXML
     private ObservableList<Part> searchPartName(String partialName) {
         ObservableList<Part> selectedParts = FXCollections.observableArrayList();
 
@@ -155,6 +308,13 @@ public class modifyProductController implements Initializable{
     }
 
 
+    /**
+     * Loads MainController.
+     *
+     * @param actionEvent Cancel button action.
+     * @throws IOException From FXMLLoader.
+     */
+    @FXML
     public void backToMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
