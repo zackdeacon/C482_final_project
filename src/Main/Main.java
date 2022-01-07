@@ -1,10 +1,14 @@
-package model;
+package Main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Inventory;
+import model.Product;
+import model.inHouse;
+import model.outSourced;
 
 import static model.Inventory.getNewPartID;
 import static model.Inventory.getNewProductID;
