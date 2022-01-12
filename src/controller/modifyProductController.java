@@ -247,8 +247,12 @@ public class modifyProductController implements Initializable{
     @FXML
     public void addAssociation() {
         Part selected = (Part) ModifyProductPartTable.getSelectionModel().getSelectedItem();
-        associatedParts.add(selected);
-        ModifyProductAssociatedPartTable.setItems(associatedParts);
+        if(selected == null){
+            alertToDisplay(12);
+        } else {
+            associatedParts.add(selected);
+            ModifyProductAssociatedPartTable.setItems(associatedParts);
+        }
     }
 
     /**

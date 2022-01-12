@@ -480,6 +480,11 @@ public class mainController implements Initializable {
                 infoAlert.setHeaderText("Please make sure Machine ID consists of numbers only");
                 infoAlert.showAndWait();
                 break;
+            case 12:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Please select a part!");
+                infoAlert.showAndWait();
+                break;
         }
     }
 

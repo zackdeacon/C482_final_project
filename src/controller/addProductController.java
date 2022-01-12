@@ -208,8 +208,12 @@ public class addProductController implements Initializable {
     @FXML
     public void toAddAssociation() {
         Part selectedPart = (Part) addProductTable.getSelectionModel().getSelectedItem();
-        associatedParts.add(selectedPart);
-        addProductAssociatedPartsTable.setItems(associatedParts);
+        if (selectedPart == null){
+            alertToDisplay(12);
+        } else {
+            associatedParts.add(selectedPart);
+            addProductAssociatedPartsTable.setItems(associatedParts);
+        }
     }
 
     /**

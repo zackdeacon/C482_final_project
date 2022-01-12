@@ -141,6 +141,23 @@ public class Inventory {
     }
 
     /**
+     * Searches the list of products by ID.
+     *
+     * @param productID The product ID.
+     * @return The product object if found, null if not found.
+     */
+    public static Product lookupProduct(int productID) {
+        Product productFound = null;
+        for(Product product : allProducts) {
+            if(product.getId() == productID) {
+                productFound = product;
+            }
+        }
+
+        return productFound;
+    }
+
+    /**
      * Removes a product from the list of parts.
      *
      * @param selectedProduct The product to be removed.
@@ -153,6 +170,42 @@ public class Inventory {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Searches the list of products by name.
+     *
+     * @param productName The product name.
+     * @return A list of products found.
+     */
+    public static ObservableList<Product> lookupProduct(String productName) {
+        ObservableList<Product> productsFound = FXCollections.observableArrayList();
+
+        for (Product product : allProducts) {
+            if (product.getName().equals(productName)) {
+                productsFound.add(product);
+            }
+        }
+
+        return productsFound;
+    }
+
+    /**
+     * Searches the list of parts by name.
+     *
+     * @param partName The part name.
+     * @return A list of parts found.
+     */
+    public static ObservableList<Part> lookupPart(String partName) {
+        ObservableList<Part> partsFound = FXCollections.observableArrayList();
+
+        for (Part part : allParts) {
+            if (part.getName().equals(partName)) {
+                partsFound.add(part);
+            }
+        }
+
+        return partsFound;
     }
 
 }
