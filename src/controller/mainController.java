@@ -350,6 +350,12 @@ public class mainController implements Initializable {
                 selectedProducts.add(selectedProduct);
             }
         }
+
+        if(selectedProducts.size() == 0) {
+            alertToDisplay(13);
+            return Inventory.getAllProducts();
+        }
+
         return selectedProducts;
     }
 
@@ -373,6 +379,11 @@ public class mainController implements Initializable {
             } else if(String.valueOf(selectedPart.getId()).contains(partialName)){
                 selectedParts.add(selectedPart);
             }
+        }
+
+        if(selectedParts.size() == 0) {
+            alertToDisplay(13);
+            return Inventory.getAllParts();
         }
 
         return selectedParts;
@@ -483,6 +494,11 @@ public class mainController implements Initializable {
             case 12:
                 infoAlert.setTitle("ERROR");
                 infoAlert.setHeaderText("Please select a part!");
+                infoAlert.showAndWait();
+                break;
+            case 13:
+                infoAlert.setTitle("ERROR");
+                infoAlert.setHeaderText("Your search came up empty! Please try searching again with different parameters.");
                 infoAlert.showAndWait();
                 break;
         }

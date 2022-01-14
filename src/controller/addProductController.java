@@ -198,6 +198,11 @@ public class addProductController implements Initializable {
             }
         }
 
+        if(selectedParts.size() == 0) {
+            alertToDisplay(13);
+            return Inventory.getAllParts();
+        }
+
         return selectedParts;
     }
 
